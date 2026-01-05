@@ -1,0 +1,22 @@
+{
+  "name": "tasky-backend",
+  "version": "1.0.0",
+  "description": "backend for tasky",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notsooryaa/tasky-backend.git"
+  },
+  "author": "Sooryaa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/notsooryaa/tasky-backend/issues"
+  },
+  "homepage": "https://github.com/notsooryaa/tasky-backend#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
