@@ -1,8 +1,14 @@
 const User = require('../models/user.model');
+const bcrypt = require('bcryptjs');
+const { generateAccessToken } = require('../utils/jwt.js');
 
 // Get all users
 const getAllUsers = async (req, res) => {
   try {
+    console.log(req.user)
+    if (!req.user.admin) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
     const users = await User.find();
     res.json(users);
   } catch (error) {
@@ -23,10 +29,13 @@ const getUserById = async (req, res) => {
 
 // Create a new user
 const createUser = async (req, res) => {
-  const user = new User(req.body);
   try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const userData = { ...req.body, password: hashedPassword };
+    const user = new User(userData);
     const newUser = await user.save();
-    res.status(201).json(newUser);
+    const accessToken = generateAccessToken(newUser);
+    res.status(201).json({ user: newUser, accessToken });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

@@ -20,6 +20,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       select: false,
     },
+    admin: {
+      type: Boolean,
+      default: false,
+      select: false,
+    },
     refreshToken: {
       type: String,
       select: false,
